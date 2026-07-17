@@ -5,16 +5,21 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DEST="$HOME/.claude/personal-memory.md"
 GLOBAL="$HOME/.claude/CLAUDE.md"
-REF="@personal-memory.md"
 
 mkdir -p "$HOME/.claude"
-cp "$SCRIPT_DIR/MEMORY.md" "$DEST"
-
 touch "$GLOBAL"
-if ! grep -qxF "$REF" "$GLOBAL"; then
-  printf '\n%s\n' "$REF" >>"$GLOBAL"
-  echo "Added $REF to $GLOBAL"
-fi
-echo "Installed MEMORY.md as $DEST"
+
+# install_doc <repo file> <name under ~/.claude>
+install_doc() {
+  local src="$1" dest_name="$2" ref="@$2"
+  cp "$SCRIPT_DIR/$src" "$HOME/.claude/$dest_name"
+  if ! grep -qxF "$ref" "$GLOBAL"; then
+    printf '\n%s\n' "$ref" >>"$GLOBAL"
+    echo "Added $ref to $GLOBAL"
+  fi
+  echo "Installed $src as ~/.claude/$dest_name"
+}
+
+install_doc MEMORY.md personal-memory.md
+install_doc codegraph.md codegraph.md
