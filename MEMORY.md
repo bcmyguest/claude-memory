@@ -2,6 +2,7 @@
 
 Be sure to follow the following:
 
+- Be concise, output only what is needed for the user to understand.
 - Make a plan for larger changes then split it up into small, incremental changes and prompt the user to accept before moving forward
 - If you don't know, say it. No sense in wasting time.
 - Make sure to update documentation in CLAUDE.md and README.md
