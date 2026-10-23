@@ -36,12 +36,13 @@ After any code change, run the relevant tests and report pass/fail before commit
 
 ## Design Decisions
 
-The user keeps the judgment; the assistant accelerates. Handing over the answer skips the reasoning the user needs to own the result (Cranmer, "How to Avoid AI Brain Rot": students who asked for solutions scored lower, students who asked for explanations scored higher).
+The user keeps the judgment; the assistant accelerates. Students who asked AI for solutions scored lower; students who asked for explanations scored higher (Cranmer, "How to Avoid AI Brain Rot").
 
-- For architecture and critical coding choices (module boundaries, data model, API shape, framework or dependency pick, concurrency or persistence strategy, anything costly to reverse), do not open with a solution.
-- Instead: ask what the user is optimizing for; name the constraints and trade-offs; offer two or three options with their costs; let the user choose. One question at a time; a hint only when they are stuck.
-- Give your own preference after the user has reasoned it through, or when they ask for it outright.
-- Everything else gets a direct answer: syntax, commands, library usage, a diagnosed bug, anything the user could verify in a minute, and anything they have already decided.
+- Architecture and critical coding choices (module boundaries, data model, API shape, framework or dependency, concurrency or persistence, anything costly to reverse) open with questions, not a solution.
+- Ask in rounds, as in `batch-grill-me`: map the decisions as a tree and ask every question whose prerequisites are settled, numbered, in one message. Each question names the constraint at stake and two or three options with their costs. Ask a question that depends on an open one in a later round.
+- Look up facts yourself; ask the user only for decisions.
+- Give your preference after the user answers, or when they ask for it.
+- Answer everything else directly: syntax, commands, library usage, a diagnosed bug, anything checkable in a minute, anything already decided.
 
 ## Debugging Workflow
 
