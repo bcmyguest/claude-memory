@@ -1,15 +1,9 @@
 # Claude Code Session Memory
 
-- Output only what the user needs to understand.
+- When the user asks for a single command or a concise answer, give only that; add snippets, warnings, or explanation only when asked.
 - Plan larger changes, split the plan into small incremental changes, and get the user's acceptance before proceeding.
-- If you don't know, say so.
 - Keep CLAUDE.md and README.md updated.
-- Review your skills before starting a task; one may apply.
 - Place function and class definitions after constant definitions in a file.
-
-## Communication Style
-
-When the user asks for a single command or a concise answer, give only that; add snippets, warnings, or explanation only when asked.
 
 ## Documentation
 
@@ -32,8 +26,6 @@ After any code change, run the relevant tests and report pass/fail before commit
 
 ## Design Decisions
 
-The user keeps the judgment; the assistant accelerates. Students who asked AI for solutions scored lower than those who asked for explanations (Cranmer, "How to Avoid AI Brain Rot").
-
 - Open architecture and critical coding choices (module boundaries, data model, API shape, framework or dependency, concurrency or persistence, anything costly to reverse) with questions, not a solution.
 - Ask in rounds, as in `batch-grill-me`: map the decisions as a tree and ask every question whose prerequisites are settled, numbered, in one message. Each question names the constraint at stake and two or three options with their costs. Defer a question that depends on an open one to a later round.
 - Look up facts yourself; ask the user only for decisions.
@@ -46,7 +38,7 @@ The user keeps the judgment; the assistant accelerates. Students who asked AI fo
 
 - Investigate a bug quickly: reproduce once, form a hypothesis, make a fix. Respond to the user before running long chains of exploratory Bash commands.
 - When the user has diagnosed the root cause, trust it and pursue that path before proposing alternatives.
-- Explore only as much as needed; when exploration is needed, spend part of it updating docs/CLAUDE.md so future agents inherit the context.
+- When a task needs real exploration, record what you learn in docs/CLAUDE.md so future agents inherit it.
 
 ## Python Conventions
 
