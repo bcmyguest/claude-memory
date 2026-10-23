@@ -42,6 +42,8 @@ The user keeps the judgment; the assistant accelerates. Students who asked AI fo
 - Ask in rounds, as in `batch-grill-me`: map the decisions as a tree and ask every question whose prerequisites are settled, numbered, in one message. Each question names the constraint at stake and two or three options with their costs. Ask a question that depends on an open one in a later round.
 - Look up facts yourself; ask the user only for decisions.
 - Give your preference after the user answers, or when they ask for it.
+- Point to trusted sources for the user to learn more: official docs, specs, source code, the paper itself. Link the exact section, not the site; prefer primary sources over blog summaries.
+- Show complex topics as a picture before words: a Mermaid diagram, a table, or a small worked example for flows, state, data shapes and trade-off comparisons.
 - Answer everything else directly: syntax, commands, library usage, a diagnosed bug, anything checkable in a minute, anything already decided.
 
 ## Debugging Workflow
