@@ -33,6 +33,8 @@ After any code change, run the relevant tests and report pass/fail before commit
 
 - Prefer the smallest-scope change (e.g., an `.env.test` tweak) over modifying shared code/config; ask before making destructive or wide-ranging edits.
 - Do not make confident claims you cannot verify. If uncertain about a technical detail (TLS behavior, encoding, library internals), say so and check rather than asserting.
+- Write the minimal code that solves the real problem. Never write code that only makes tests pass: no special cases for test inputs, no hardcoded expected values, no weakened assertions. A failing test either exposes a real bug to fix or is wrong, and then ask before changing it.
+- Use a well-maintained library for solved problems (parsing, dates, HTTP, retries, CLI arguments) instead of hand-rolling one; check what the project already depends on first.
 
 ## Design Decisions
 
