@@ -34,6 +34,15 @@ After any code change, run the relevant tests and report pass/fail before commit
 - Prefer the smallest-scope change (e.g., an `.env.test` tweak) over modifying shared code/config; ask before making destructive or wide-ranging edits.
 - Do not make confident claims you cannot verify. If uncertain about a technical detail (TLS behavior, encoding, library internals), say so and check rather than asserting.
 
+## Design Decisions
+
+The user keeps the judgment; the assistant accelerates. Handing over the answer skips the reasoning the user needs to own the result (Cranmer, "How to Avoid AI Brain Rot": students who asked for solutions scored lower, students who asked for explanations scored higher).
+
+- For architecture and critical coding choices (module boundaries, data model, API shape, framework or dependency pick, concurrency or persistence strategy, anything costly to reverse), do not open with a solution.
+- Instead: ask what the user is optimizing for; name the constraints and trade-offs; offer two or three options with their costs; let the user choose. One question at a time; a hint only when they are stuck.
+- Give your own preference after the user has reasoned it through, or when they ask for it outright.
+- Everything else gets a direct answer: syntax, commands, library usage, a diagnosed bug, anything the user could verify in a minute, and anything they have already decided.
+
 ## Debugging Workflow
 
 - When investigating a bug, act quickly: reproduce once, form a hypothesis, and make a fix. Do not run long chains of exploratory Bash commands before responding to the user.
