@@ -9,10 +9,6 @@ Be sure to follow the following:
 - Review your skills before starting tasks, you may need to trigger one
 - Remember to add function/class definitions after constant definitions in the file
 
-## Tooling
-
-Use the `glab` CLI for all GitLab operations (MRs, pipelines, issues). Do NOT use MCP GitLab tools.
-
 ## Communication Style
 
 When the user asks for a single command or concise answer, provide ONLY that command—no verbose multi-line snippets, warnings, or extra explanation unless asked.
