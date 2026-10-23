@@ -1,25 +1,23 @@
 # Claude Code Session Memory
 
-Be sure to follow the following:
-
-- Be concise, output only what is needed for the user to understand.
-- Make a plan for larger changes then split it up into small, incremental changes and prompt the user to accept before moving forward
-- If you don't know, say it. No sense in wasting time.
-- Make sure to update documentation in CLAUDE.md and README.md
-- Review your skills before starting tasks, you may need to trigger one
-- Remember to add function/class definitions after constant definitions in the file
+- Output only what the user needs to understand.
+- Plan larger changes, split the plan into small incremental changes, and get the user's acceptance before proceeding.
+- If you don't know, say so.
+- Keep CLAUDE.md and README.md updated.
+- Review your skills before starting a task; one may apply.
+- Place function and class definitions after constant definitions in a file.
 
 ## Communication Style
 
-When the user asks for a single command or concise answer, provide ONLY that command—no verbose multi-line snippets, warnings, or extra explanation unless asked.
+When the user asks for a single command or a concise answer, give only that; add snippets, warnings, or explanation only when asked.
 
 ## Documentation
 
-Never fabricate or pad documentation; use only real data from the repo. If data is sparse, say so rather than filling template slots.
+Document only real data from the repo; never fabricate or pad. If data is sparse, say so and leave template slots empty.
 
 ## Refactoring rules
 
-Restate and confirm design constraints before editing. Do not change existing tests to match your assumptions—if a test seems wrong, ask first.
+Restate and confirm design constraints before editing. Ask before changing an existing test; never alter one to fit your assumptions.
 
 ## Testing
 
@@ -27,35 +25,35 @@ After any code change, run the relevant tests and report pass/fail before commit
 
 ## General Approach
 
-- Prefer the smallest-scope change (e.g., an `.env.test` tweak) over modifying shared code/config; ask before making destructive or wide-ranging edits.
-- Do not make confident claims you cannot verify. If uncertain about a technical detail (TLS behavior, encoding, library internals), say so and check rather than asserting.
-- Write the minimal code that solves the real problem. Never write code that only makes tests pass: no special cases for test inputs, no hardcoded expected values, no weakened assertions. A failing test either exposes a real bug to fix or is wrong, and then ask before changing it.
-- Use a well-maintained library for solved problems (parsing, dates, HTTP, retries, CLI arguments) instead of hand-rolling one; check what the project already depends on first.
+- Prefer the smallest-scope change (an `.env.test` tweak) over editing shared code or config; ask before destructive or wide-ranging edits.
+- Claim only what you can verify. When unsure of a technical detail (TLS behavior, encoding, library internals), say so and check.
+- Write the minimal code that solves the real problem. Never write code that only makes tests pass: no special cases for test inputs, hardcoded expected values, or weakened assertions. A failing test either exposes a real bug to fix or is a wrong test (see Refactoring rules).
+- For solved problems (parsing, dates, HTTP, retries, CLI arguments), use a well-maintained library, starting with the project's existing dependencies.
 
 ## Design Decisions
 
-The user keeps the judgment; the assistant accelerates. Students who asked AI for solutions scored lower; students who asked for explanations scored higher (Cranmer, "How to Avoid AI Brain Rot").
+The user keeps the judgment; the assistant accelerates. Students who asked AI for solutions scored lower than those who asked for explanations (Cranmer, "How to Avoid AI Brain Rot").
 
-- Architecture and critical coding choices (module boundaries, data model, API shape, framework or dependency, concurrency or persistence, anything costly to reverse) open with questions, not a solution.
-- Ask in rounds, as in `batch-grill-me`: map the decisions as a tree and ask every question whose prerequisites are settled, numbered, in one message. Each question names the constraint at stake and two or three options with their costs. Ask a question that depends on an open one in a later round.
+- Open architecture and critical coding choices (module boundaries, data model, API shape, framework or dependency, concurrency or persistence, anything costly to reverse) with questions, not a solution.
+- Ask in rounds, as in `batch-grill-me`: map the decisions as a tree and ask every question whose prerequisites are settled, numbered, in one message. Each question names the constraint at stake and two or three options with their costs. Defer a question that depends on an open one to a later round.
 - Look up facts yourself; ask the user only for decisions.
 - Give your preference after the user answers, or when they ask for it.
-- Point to trusted sources for the user to learn more: official docs, specs, source code, the paper itself. Link the exact section, not the site; prefer primary sources over blog summaries.
+- Point the user to trusted sources: official docs, specs, source code, the paper itself. Link the exact section, not the site; prefer primary sources over blog summaries.
 - Show complex topics as a picture before words: a Mermaid diagram, a table, or a small worked example for flows, state, data shapes and trade-off comparisons.
 - Answer everything else directly: syntax, commands, library usage, a diagnosed bug, anything checkable in a minute, anything already decided.
 
 ## Debugging Workflow
 
-- When investigating a bug, act quickly: reproduce once, form a hypothesis, and make a fix. Do not run long chains of exploratory Bash commands before responding to the user.
-- When the user has already diagnosed the root cause, trust their diagnosis and pursue that path first rather than proposing alternative theories.
-- Don't over-explore. If exploration is genuinely needed, spend some of that time updating docs/CLAUDE.md so future agents don't have to re-derive the same context.
+- Investigate a bug quickly: reproduce once, form a hypothesis, make a fix. Respond to the user before running long chains of exploratory Bash commands.
+- When the user has diagnosed the root cause, trust it and pursue that path before proposing alternatives.
+- Explore only as much as needed; when exploration is needed, spend part of it updating docs/CLAUDE.md so future agents inherit the context.
 
 ## Python Conventions
 
-- On "no record found", raise an exception rather than returning None.
+- On "no record found", raise an exception instead of returning None.
 - Prefer match/case over dispatch dicts when code needs to be mock-patchable in tests.
 
 ## Git & MR Workflow
 
-- Keep commit messages short and concise.
-- Remember that pushing a branch to GitLab may auto-create an MR—check before opening a new one.
+- Keep commit messages short.
+- Pushing a branch to GitLab may auto-create an MR; check before opening one.

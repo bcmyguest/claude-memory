@@ -6,8 +6,8 @@ and reference them from the global `~/.claude/CLAUDE.md` with an `@` include.
 Codex and Cursor receive the same instructions in managed blocks in
 `~/.codex/AGENTS.md` and `~/.cursor/rules.md`.
 
-[`MEMORY.md`](MEMORY.md) is the single source of truth for the general instructions;
-[`codegraph.md`](codegraph.md) holds the codegraph-vs-grep guidance.
+[`MEMORY.md`](MEMORY.md) holds the general instructions;
+[`codegraph.md`](codegraph.md) the codegraph-vs-grep guidance.
 The repo also carries debugging skills in [`skills/`](skills).
 
 ## Install / update
@@ -23,10 +23,8 @@ git clone git@github.com:bcmyguest/claude-memory.git
    `~/.claude/codegraph.md` (overwrites — `git pull` and re-run to update).
 2. Appends `@personal-memory.md` and `@codegraph.md` to `~/.claude/CLAUDE.md`, once each.
 3. Appends `@bcmyguest/personal-skills/files/skills/writing-with-clarity` to `~/.claude/CLAUDE.md`.
-4. Replaces the marked `claude-memory` block in `~/.codex/AGENTS.md`, preserving
-   any instructions outside that block.
-5. Replaces the marked `claude-memory` block in `~/.cursor/rules.md`, preserving
-   any instructions outside that block.
+4. Replaces the marked `claude-memory` block in `~/.codex/AGENTS.md` and
+   `~/.cursor/rules.md`, preserving instructions outside the block.
 
 ## Skills
 
