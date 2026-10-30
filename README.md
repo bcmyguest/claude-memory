@@ -23,7 +23,9 @@ git clone git@github.com:bcmyguest/claude-memory.git
    `~/.claude/codegraph.md` (overwrites — `git pull` and re-run to update).
 2. Appends `@personal-memory.md` and `@codegraph.md` to `~/.claude/CLAUDE.md`, once each.
 3. Appends `@bcmyguest/personal-skills/files/skills/writing-with-clarity` to `~/.claude/CLAUDE.md`.
-4. Replaces the marked `claude-memory` block in `~/.codex/AGENTS.md` and
+4. Adds the tools in [`denied-tools.txt`](denied-tools.txt) to `permissions.deny` in
+   `~/.claude/settings.json`, keeping existing entries. Denied tools drop out of every request.
+5. Replaces the marked `claude-memory` block in `~/.codex/AGENTS.md` and
    `~/.cursor/rules.md`, preserving instructions outside the block.
 
 ## Skills
@@ -43,7 +45,8 @@ npx skills add bcmyguest/claude-memory
 Delete `~/.claude/personal-memory.md` and `~/.claude/codegraph.md`, remove the
 `@personal-memory.md`, `@codegraph.md`, and `@bcmyguest/personal-skills/files/skills/writing-with-clarity` lines from `~/.claude/CLAUDE.md`, and
 remove the blocks between `<!-- claude-memory:start -->` and
-`<!-- claude-memory:end -->` from both `~/.codex/AGENTS.md` and `~/.cursor/rules.md`.
+`<!-- claude-memory:end -->` from both `~/.codex/AGENTS.md` and `~/.cursor/rules.md`. Remove the `denied-tools.txt` names from `permissions.deny` in
+`~/.claude/settings.json`.
 
 ## License
 

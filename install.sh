@@ -6,6 +6,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CLAUDE_GLOBAL="$HOME/.claude/CLAUDE.md"
+CLAUDE_SETTINGS="$HOME/.claude/settings.json"
 CODEX_GLOBAL="$HOME/.codex/AGENTS.md"
 CURSOR_GLOBAL="$HOME/.cursor/rules.md"
 CODEX_START='<!-- claude-memory:start -->'
@@ -30,6 +31,23 @@ install_doc() {
     echo "Added $ref to $CLAUDE_GLOBAL"
   fi
   echo "Installed $src as ~/.claude/$dest_name"
+}
+
+# Add denied-tools.txt to permissions.deny; denied tools leave the request, saving context.
+install_denied_tools() {
+  python3 - "$CLAUDE_SETTINGS" "$SCRIPT_DIR/denied-tools.txt" <<'PY'
+import json, os, sys
+path, tools = sys.argv[1], open(sys.argv[2]).read().split()
+settings = json.load(open(path)) if os.path.exists(path) else {}
+deny = settings.setdefault('permissions', {}).setdefault('deny', [])
+added = [t for t in tools if t not in deny]
+deny += added
+with open(path + '.tmp', 'w') as f:
+    json.dump(settings, f, indent=2)
+    f.write('\n')
+os.replace(path + '.tmp', path)
+print(f"Denied {len(added)} new tools in {path}" if added else f"Denied tools already in {path}")
+PY
 }
 
 install_codex_docs() {
@@ -115,5 +133,6 @@ if [[ -f "$CLARITY_SKILL" ]]; then
 else
   echo "writing-with-clarity is not installed; run: npx skills add bcmyguest/personal-skills --skill writing-with-clarity -g" >&2
 fi
+install_denied_tools
 install_codex_docs
 install_cursor_docs
