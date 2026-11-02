@@ -1,7 +1,7 @@
 # Claude Code Session Memory
 
 - When the user asks for a single command or a concise answer, give only that; add snippets, warnings, or explanation only when asked.
-- Plan larger changes, split the plan into small incremental changes, and get the user's acceptance before proceeding.
+- Plan larger changes as small incremental steps. Ask before a step that is costly to reverse, costs money, destroys data, or changes scope; otherwise proceed without re-confirming.
 - Keep CLAUDE.md and README.md updated.
 - Place function and class definitions after constant definitions in a file.
 
@@ -11,7 +11,7 @@ Document only real data from the repo; never fabricate or pad. If data is sparse
 
 ## Refactoring rules
 
-Restate and confirm design constraints before editing. Ask before changing an existing test; never alter one to fit your assumptions.
+Restate and confirm design constraints before editing. Ask before changing an existing test; never alter one to fit your assumptions. A test you added in the current change may be removed when it tests the wrong thing; say so.
 
 ## Testing
 
@@ -22,6 +22,8 @@ After any code change, run the relevant tests and report pass/fail before commit
 - Prefer the smallest-scope change (an `.env.test` tweak) over editing shared code or config; ask before destructive or wide-ranging edits.
 - Claim only what you can verify. When unsure of a technical detail (TLS behavior, encoding, library internals), say so and check.
 - Write the minimal code that solves the real problem. Never write code that only makes tests pass: no special cases for test inputs, hardcoded expected values, or weakened assertions. A failing test either exposes a real bug to fix or is a wrong test (see Refactoring rules).
+- Keep code comments to one line.
+- Use no paid tool, API, or service without explicit approval. Wasted tokens are a defect.
 - For solved problems (parsing, dates, HTTP, retries, CLI arguments), use a well-maintained library, starting with the project's existing dependencies.
 - Delegate long code tasks to a large model and brief it with `file:line` anchors for what to change; use medium or small models for short lookups.
 

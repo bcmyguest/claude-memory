@@ -14,7 +14,7 @@ CODEX_END='<!-- claude-memory:end -->'
 CURSOR_START='<!-- claude-memory:start -->'
 CURSOR_END='<!-- claude-memory:end -->'
 # writing-with-clarity is always on: Claude @includes the installed skill; Codex and Cursor get its text.
-# Install the skill first: npx skills add bcmyguest/personal-skills --skill writing-with-clarity -g
+# Install the skill first: npx skills add bcmyguest/claude-memory --skill writing-with-clarity -g
 CLARITY_SKILL="$HOME/.claude/skills/writing-with-clarity/SKILL.md"
 CLARITY_REF='@skills/writing-with-clarity/SKILL.md'
 STALE_CLARITY_REF='@bcmyguest/personal-skills/files/skills/writing-with-clarity'
@@ -131,7 +131,7 @@ if [[ -f "$CLARITY_SKILL" ]]; then
     echo "Added $CLARITY_REF to $CLAUDE_GLOBAL"
   fi
 else
-  echo "writing-with-clarity is not installed; run: npx skills add bcmyguest/personal-skills --skill writing-with-clarity -g" >&2
+  echo "writing-with-clarity is not installed; run: npx skills add bcmyguest/claude-memory --skill writing-with-clarity -g" >&2
 fi
 install_denied_tools
 install_codex_docs

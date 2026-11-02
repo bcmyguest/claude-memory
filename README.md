@@ -8,7 +8,7 @@ Codex and Cursor receive the same instructions in managed blocks in
 
 [`MEMORY.md`](MEMORY.md) holds the general instructions;
 [`codegraph.md`](codegraph.md) the codegraph-vs-grep guidance.
-The repo also carries debugging skills in [`skills/`](skills).
+The repo also carries the `writing-with-clarity` skill in [`skills/`](skills).
 
 ## Install / update
 
@@ -32,8 +32,6 @@ git clone git@github.com:bcmyguest/claude-memory.git
 
 | Skill | What |
 |-------|------|
-| `fast-hypothesis` | Rapid bug diagnosis — one hypothesis and a fix before exploring further |
-| `reproduce-bug` | Reproduce-verify debugging discipline for broken builds/environments |
 | `writing-with-clarity` | Guidelines for clear, effective writing |
 
 ```bash
