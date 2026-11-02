@@ -5,6 +5,13 @@
 - Keep CLAUDE.md and README.md updated.
 - Place function and class definitions after constant definitions in a file.
 
+## Writing
+
+- Omit needless words: no hedges, decorative qualifiers, meta-text, or pleasantries before or after the answer.
+- Use the active voice and the positive form: state what is, not what is not.
+- Prefer concrete nouns and exact numbers to abstractions.
+- Prefer the short form: "whether" over "the question as to whether", "because" over "the reason why is that".
+
 ## Documentation
 
 Document only real data from the repo; never fabricate or pad. If data is sparse, say so and leave template slots empty.

@@ -13,11 +13,8 @@ CODEX_START='<!-- claude-memory:start -->'
 CODEX_END='<!-- claude-memory:end -->'
 CURSOR_START='<!-- claude-memory:start -->'
 CURSOR_END='<!-- claude-memory:end -->'
-# writing-with-clarity is always on: Claude @includes the installed skill; Codex and Cursor get its text.
-# Install the skill first: npx skills add bcmyguest/claude-memory --skill writing-with-clarity -g
-CLARITY_SKILL="$HOME/.claude/skills/writing-with-clarity/SKILL.md"
-CLARITY_REF='@skills/writing-with-clarity/SKILL.md'
-STALE_CLARITY_REF='@bcmyguest/personal-skills/files/skills/writing-with-clarity'
+# Includes from earlier versions; the writing rules now live in MEMORY.md.
+STALE_REFS=('@skills/writing-with-clarity/SKILL.md' '@bcmyguest/personal-skills/files/skills/writing-with-clarity')
 
 mkdir -p "$HOME/.claude" "$HOME/.codex" "$HOME/.cursor"
 touch "$CLAUDE_GLOBAL" "$CODEX_GLOBAL" "$CURSOR_GLOBAL"
@@ -71,7 +68,6 @@ install_codex_docs() {
     cat "$SCRIPT_DIR/MEMORY.md"
     printf '\n\n'
     cat "$SCRIPT_DIR/codegraph.md"
-    if [[ -f "$CLARITY_SKILL" ]]; then printf '\n\n'; cat "$CLARITY_SKILL"; fi
     printf '\n\n%s\n' "$CODEX_END"
   } >"$managed"
 
@@ -105,7 +101,6 @@ install_cursor_docs() {
     cat "$SCRIPT_DIR/MEMORY.md"
     printf '\n\n'
     cat "$SCRIPT_DIR/codegraph.md"
-    if [[ -f "$CLARITY_SKILL" ]]; then printf '\n\n'; cat "$CLARITY_SKILL"; fi
     printf '\n\n%s\n' "$CURSOR_END"
   } >"$managed"
 
@@ -120,19 +115,12 @@ install_cursor_docs() {
 
 install_doc MEMORY.md personal-memory.md
 install_doc codegraph.md codegraph.md
-# Earlier versions added an include that resolves to no file.
-if grep -qxF "$STALE_CLARITY_REF" "$CLAUDE_GLOBAL"; then
-  grep -vxF "$STALE_CLARITY_REF" "$CLAUDE_GLOBAL" >"$CLAUDE_GLOBAL.tmp" && mv "$CLAUDE_GLOBAL.tmp" "$CLAUDE_GLOBAL"
-  echo "Removed $STALE_CLARITY_REF from $CLAUDE_GLOBAL"
-fi
-if [[ -f "$CLARITY_SKILL" ]]; then
-  if ! grep -qxF "$CLARITY_REF" "$CLAUDE_GLOBAL"; then
-    printf '\n%s\n' "$CLARITY_REF" >>"$CLAUDE_GLOBAL"
-    echo "Added $CLARITY_REF to $CLAUDE_GLOBAL"
+for ref in "${STALE_REFS[@]}"; do
+  if grep -qxF "$ref" "$CLAUDE_GLOBAL"; then
+    grep -vxF "$ref" "$CLAUDE_GLOBAL" >"$CLAUDE_GLOBAL.tmp" && mv "$CLAUDE_GLOBAL.tmp" "$CLAUDE_GLOBAL"
+    echo "Removed $ref from $CLAUDE_GLOBAL"
   fi
-else
-  echo "writing-with-clarity is not installed; run: npx skills add bcmyguest/claude-memory --skill writing-with-clarity -g" >&2
-fi
+done
 install_denied_tools
 install_codex_docs
 install_cursor_docs
