@@ -1,0 +1,12 @@
+id = "address-review-comments-before-finish"
+description = "Work a PR's review comments and failing jobs with the babysit-pr skill."
+mode = "steer"
+status = "active"
+engine = "steer"
+
+[steer]
+action = "inform"
+message = "Babysit this PR with the babysit-pr skill: every review thread ends fixed and resolved, answered with a reason, or in the roundup, and every job ends green."
+
+[steer.trigger]
+prompt = '(?i)\b(babysit|shepherd)\b|\b(review|reviewer|pr|mr|pull request|merge request)\b.{0,40}\b(comments?|threads?|feedback)\b|\b(comments?|threads?|feedback)\b.{0,40}\b(pr|mr|pull request|merge request|review|reviewer)\b'
