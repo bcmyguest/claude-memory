@@ -9,4 +9,4 @@ action = "inform"
 message = "Babysit this PR with the babysit-pr skill: every review thread ends fixed and resolved, answered with a reason, or in the roundup, and every job ends green."
 
 [steer.trigger]
-prompt = '(?i)\b(babysit|shepherd)\b|\b(review|reviewer|pr|mr|pull request|merge request)\b.{0,40}\b(comments?|threads?|feedback)\b|\b(comments?|threads?|feedback)\b.{0,40}\b(pr|mr|pull request|merge request|review|reviewer)\b'
+prompt = '(?i)\b(babysit|shepherd)\b|\b(review|reviewer|pr|mr|pull request|merge request)\b.{0,40}\b(comments?|threads?|feedback)\b|\b(comments?|threads?|feedback)\b.{0,40}\b(pr|mr|pull request|merge request|review|reviewer)\b|\b(checks|ci|jobs?|pipelines?|workflows?)\b.{0,30}\bfail(s|ed|ing|ures?)?\b|\bfail(s|ed|ing|ures?)?\b.{0,30}\b(checks|ci|jobs?|pipelines?|workflows?)\b|\b(pr|mr)\s*#?\d+\b'

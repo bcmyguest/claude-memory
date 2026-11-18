@@ -1,9 +1,9 @@
 {
   "rule": "address-review-comments-before-finish",
-  "dir_sha256": "dbbcc50a17a315d304771d490c923ce1c81e7d1e6a41ad1538cf1c4abd55017b",
+  "dir_sha256": "0d5563b8f381e0c39d254e54698f0d0d1a8adebc272c6c534b22128bde3715cf",
   "checker_version": "0.4.0",
   "checker_sha256": "33467457b647b33104369d49dddab85ed826fd8d1c63d28650687689ae7bc13e",
   "backend": "matcher",
-  "timestamp": 1795022606,
+  "timestamp": 1795022847,
   "result": "proven"
 }
