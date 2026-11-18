@@ -1,0 +1,1 @@
+{"event": "tool", "tool": "Bash", "command": "gh pr view --json comments"}
