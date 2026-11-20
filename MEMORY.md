@@ -58,4 +58,5 @@ After any code change, run the relevant tests and report pass/fail before commit
 ## Git & MR Workflow
 
 - Keep commit messages short.
+- Attach proof to every PR or MR without being asked: the commands run and their output (tests, checks, the feature exercised end to end), and a screenshot for anything visual. Post it in the description or a comment.
 - Pushing a branch to GitLab may auto-create an MR; check before opening one.
