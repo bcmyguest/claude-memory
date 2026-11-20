@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install personal instructions for Claude Code, Codex, and Cursor. Claude uses @include
+# Install personal instructions for Claude Code, Codex, and Cursor, then the tagged skill and plugin repos. Claude uses @include
 # references; Codex and Cursor get the same source documents in managed blocks.
 # Idempotent: `git pull` this repo and re-run to pick up updates.
 set -euo pipefail
@@ -124,3 +124,8 @@ done
 install_denied_tools
 install_codex_docs
 install_cursor_docs
+# Skills and plugins: every repo of $CLAUDE_MEMORY_OWNER (default bcmyguest) tagged with
+# the topic $CLAUDE_MEMORY_TOPIC (default claude-memory). Set CLAUDE_MEMORY_SKIP_REPOS=1 to skip.
+if [[ -z "${CLAUDE_MEMORY_SKIP_REPOS:-}" ]]; then
+  python3 "$SCRIPT_DIR/install_repos.py"
+fi
